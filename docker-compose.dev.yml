@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  db:
+    build:
+      dockerfile: PostgresSSL.dockerfile
+      context: .
+    command: -c ssl=on -c ssl_cert_file=/ssl/server.crt -c ssl_key_file=/ssl/server.key
+    restart: always
+    environment:
+      POSTGRES_USER: dev-db-user
+      POSTGRES_PASSWORD: dev-db-pass
+      POSTGRES_DB: SomeDb
+    ports:
+      - 8401:5432
